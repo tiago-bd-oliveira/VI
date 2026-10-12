@@ -54,15 +54,47 @@ function drawChart( )
 	// Set chart configuration options
 	var options = {
 			title : 'UA - MIECT - Students by curricular year',
-			width : 400,
-			height : 300
+			width : 800,
+			height : 600,
 	};
 
+	var pie_options = {
+		...options,
+		is3D: true,
+	}
+
 	// Instantiate the pie chart.
-	var chart = new google.visualization.PieChart( document.getElementById('chart_div') );
+	var pie_chart = new google.visualization.PieChart( document.getElementById('pie_chart_div') );
+
+	var bar_options = {
+		...options,
+		bar: {groupWidth: "80%"},
+		hAxis: {
+			viewWindow: { min: 0 },
+		}
+	}
+
+	var bar_chart = new google.visualization.BarChart(
+		document.getElementById('bar_chart_div')
+	)
+
+	var column_options = {
+		...options,
+		vAxis: {
+			viewWindow: { min: 0 },
+		}
+
+	}
+
+	var column_chart = new google.visualization.ColumnChart(
+		document.getElementById('column_chart_div')
+	)
+
 	debugger;
 	// Draw the chart, passing in some configuration options.
-	chart.draw(data, options);
+	pie_chart.draw(data, pie_options);
+	bar_chart.draw(data, bar_options);
+	column_chart.draw(data, column_options);
 
 } // drawChart( )
 
@@ -71,7 +103,9 @@ function drawChart( )
 
 <body>
 <!--Div that will hold the pie chart-->
-<div id="chart_div" style="width:400; height:300"></div>
+<div id="pie_chart_div" style="width:800; height:600"></div>
+<div id="bar_chart_div" style="width:800; height:600"></div>
+<div id="column_chart_div" style="width:800; height:600"></div>
 </body>
 
 </html>
